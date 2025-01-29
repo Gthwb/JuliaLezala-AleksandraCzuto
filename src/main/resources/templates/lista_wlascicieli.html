@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista Właścicieli</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style th:replace="~{fragments/style :: style}"></style>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .delete-button {
+      background-color: #f44336;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .delete-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+<h1>Lista Właścicieli</h1>
+<div>
+  <a th:href="@{/wlasciciele/dodaj}">Dodaj nowego właściciela</a>
+</div>
+<table th:if="${not wlasciciele.isEmpty()}">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <th>Numer Telefonu</th>
+    <th>Email</th>
+    <th>Akcje</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="wlasciciel : ${wlasciciele}">
+    <td th:text="${wlasciciel.id}"></td>
+    <td th:text="${wlasciciel.imie}"></td>
+    <td th:text="${wlasciciel.nazwisko}"></td>
+    <td th:text="${wlasciciel.numerTelefonu}"></td>
+    <td th:text="${wlasciciel.email}"></td>
+    <td>
+      <a class="delete-button" th:href="@{/wlasciciele/usun/{id}(id=${wlasciciel.id})}">Usuń</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<p th:if="${wlasciciele.isEmpty()}">Brak zarejestrowanych właścicieli.</p>
+<div style="margin-top: 20px;">
+  <a href="/">Powrót do menu głównego</a>
+</div>
+</body>
+</html>

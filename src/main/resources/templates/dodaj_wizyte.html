@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dodaj Wizytę</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style th:replace="~{fragments/style :: style}"></style>
+</head>
+<body>
+<h1>Dodaj Wizytę</h1>
+<form th:action="@{/wizyty/dodaj}" th:object="${wizyta}" method="post">
+  <div>
+    <label for="dataCzas">Data i Czas:</label>
+    <input type="datetime-local" th:field="*{dataCzas}" id="dataCzas" />
+    <span class="error" th:if="${#fields.hasErrors('dataCzas')}" th:errors="*{dataCzas}"></span>
+  </div>
+  <div>
+    <label for="opis">Opis:</label>
+    <input type="text" th:field="*{opis}" id="opis" />
+    <span class="error" th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}"></span>
+  </div>
+  <div>
+    <label for="pacjent">Pacjent:</label>
+    <select th:field="*{pacjent}" id="pacjent">
+      <option value="">Wybierz pacjenta</option>
+      <option th:each="pacjent : ${pacjenci}" th:value="${pacjent.id}" th:text="${pacjent.imie + ' (' + pacjent.wlasciciel.imie + ' ' + pacjent.wlasciciel.nazwisko + ')'}"></option>
+    </select>
+  </div>
+  <div>
+    <input type="submit" value="Dodaj" />
+  </div>
+</form>
+<div style="margin-top: 20px;">
+  <a th:href="@{/wizyty}">Powrót do kalendarza wizyt</a>
+</div>
+</body>
+</html>

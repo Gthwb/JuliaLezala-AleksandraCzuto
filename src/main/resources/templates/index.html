@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu Główne</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style th:replace="~{fragments/style :: style}"></style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li a {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #495057;
+        }
+        li a:hover {
+            background-color: #e9ecef;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Weterynarz</h1>
+<p>Wybierz jedną z dostępnych opcji:</p>
+<ul>
+    <li><a th:href="@{/wizyty}">Kalendarz Wizyt</a></li>
+    <li><a th:href="@{/pacjenci}">Lista Pacjentów</a></li>
+    <li><a th:href="@{/pacjenci/dodaj}">Dodaj Pacjenta</a></li>
+    <li><a th:href="@{/wlasciciele}">Lista Właścicieli</a></li>
+    <li><a th:href="@{/wlasciciele/dodaj}">Dodaj Właściciela</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Pacjentów</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style th:replace="~{fragments/style :: style}"></style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista Pacjentów</h1>
+<div>
+    <a th:href="@{/pacjenci/dodaj}">Dodaj nowego pacjenta</a>
+</div>
+<table th:if="${not pacjenci.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Imię</th>
+        <th>Gatunek</th>
+        <th>Rasa</th>
+        <th>Data Urodzenia</th>
+        <th>Właściciel</th>
+        <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pacjent : ${pacjenci}">
+        <td th:text="${pacjent.imie}"></td>
+        <td th:text="${pacjent.gatunek}"></td>
+        <td th:text="${pacjent.rasa}"></td>
+        <td th:text="${#temporals.format(pacjent.dataUrodzenia, 'yyyy-MM-dd')}"></td>
+        <td th:text="${pacjent.wlasciciel != null ? pacjent.wlasciciel.imie + ' ' + pacjent.wlasciciel.nazwisko : 'Brak'}"></td>
+        <td>
+            <a class="delete-button" th:href="@{/pacjenci/usun/{id}(id=${pacjent.id})}">Usuń</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p th:if="${pacjenci.isEmpty()}">Brak zarejestrowanych pacjentów.</p>
+<div style="margin-top: 20px;">
+    <a th:href="@{/}">Powrót do menu głównego</a>
+</div>
+</body>
+</html>

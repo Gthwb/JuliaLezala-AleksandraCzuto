@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Kalendarz Wizyt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style th:replace="~{fragments/style :: style}"></style>
+</head>
+<body>
+<h1>Kalendarz Wizyt</h1>
+<div>
+  <a th:href="@{/wizyty/dodaj}">Dodaj nową wizytę</a>
+</div>
+<table th:if="${not wizyty.isEmpty()}">
+  <thead>
+  <tr>
+    <th>Data i Czas</th>
+    <th>Opis</th>
+    <th>Pacjent</th>
+    <th>Akcje</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="wizyta : ${wizyty}">
+    <td th:text="${#temporals.format(wizyta.dataCzas, 'yyyy-MM-dd HH:mm')}"></td>
+    <td th:text="${wizyta.opis}"></td>
+    <td th:text="${wizyta.pacjent != null ? wizyta.pacjent.imie : 'Brak'}"></td>
+    <td>
+      <a th:href="@{/wizyty/usun/{id}(id=${wizyta.id})}">Usuń</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<p th:if="${wizyty.isEmpty()}">Brak zaplanowanych wizyt.</p>
+<div style="margin-top: 20px;">
+  <a th:href="@{/}">Powrót do menu głównego</a>
+</div>
+</body>
+</html>
